@@ -1,5 +1,5 @@
 # Code Your Own Neural Network
-A step by step guide to code a basic neural network in C++ \
+A step by step guide to code a basic neural network in C++
 
 ## Based on the book
 ### Code Your Own Neural Network
