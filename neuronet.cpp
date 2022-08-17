@@ -1,3 +1,9 @@
+//
+//  Code Your Own Neural Network
+//  Adapted from Steven C. Shaffer
+//  Code Your Own Neural Network, 2015
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <cmath>
@@ -15,17 +21,31 @@ const double LEARNING_RATE = 0.2;
 
 void initialize(double [][ARRAY_SIZE], double [], double [], double []);
 void connect_nodes(double [][ARRAY_SIZE], double []);
+void training_example(double [], double []);
+double update_weights(double [][ARRAY_SIZE], double [], double [], double []);
+void display_network(double [], double);
+void active_network(double [][ARRAY_SIZE], double [], double []);
 
 int main(void){
     double weights[ARRAY_SIZE][ARRAY_SIZE];
     double values[ARRAY_SIZE];
     double expected_values[ARRAY_SIZE];
     double thresholds[ARRAY_SIZE];
+    double sum_of_squared_errors;
 
     printf("Neural Network Program\n");
 
     initialize(weights, values, expected_values, thresholds);
     connect_nodes(weights, thresholds);
+
+    int counter = 0;
+    while (counter < MAX_INTERATIONS) {
+        training_example(values, expected_values);
+        active_network(weights, values, thresholds);
+        sum_of_squared_errors = update_weights(weights, values, expected_values, thresholds);
+        display_network(values, sum_of_squared_errors);
+        counter++;
+    }
 
     return 0;
 }
